@@ -32,4 +32,17 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
+add_executable(robot_patrol_node src/patrol.cpp)
+ament_target_dependencies(robot_patrol_node rclcpp geometry_msgs sensor_msgs)
+
+install(TARGETS
+   robot_patrol_node
+   DESTINATION lib/${PROJECT_NAME}
+)
+
+install(DIRECTORY
+  launch
+  DESTINATION share/${PROJECT_NAME}/
+)
+
 ament_package()
