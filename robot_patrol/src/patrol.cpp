@@ -22,7 +22,7 @@ public:
   }
 
   float angle = 0;
-  float collisionThreshold = 0.3;
+  float collisionThreshold = 0.4;
 
 private:
   void scan_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg) {
@@ -30,7 +30,6 @@ private:
     laser_scan_ = std::make_shared<sensor_msgs::msg::LaserScan>(*msg);
 
     if (laser_scan_ != nullptr && !laser_scan_->ranges.empty()) {
-      // Call the function to print the distance to the closest obstacle
       angle = calculateSafeAreaAngle();
     }
   }
@@ -44,23 +43,16 @@ private:
   }
 
   float calculateSafeAreaAngle() {
-    float max_valid_range = laser_scan_->range_max;
-    float min_valid_range = laser_scan_->range_min;
-    int startLaserReadIndex = 186;
-    int endLaserReadIndex = 546;
+    int startLaserReadIndex = 180;
+    int endLaserReadIndex = 540;
 
-    float max_range = min_valid_range;
-    float range_index = -1;
+    max_range = laser_scan_->range_min;
+    range_index = -1;
 
     // Find the index of the minimum range in the laser scan data
-    for (int i = startLaserReadIndex; i < endLaserReadIndex; i++) {
-      if (laser_scan_->ranges[i] <= max_valid_range &&
-          laser_scan_->ranges[i] > max_range &&
-          !std::isinf(laser_scan_->ranges[i])) {
-
-        max_range = laser_scan_->ranges[i];
-        range_index = i;
-      }
+    for (int i = 0; i <= 180; i++) {
+      calculateAngleIndex(startLaserReadIndex + i);
+      calculateAngleIndex(endLaserReadIndex - i);
     }
 
     // No good read
@@ -68,6 +60,35 @@ private:
       return 0;
 
     return laser_scan_->angle_min + range_index * laser_scan_->angle_increment;
+  }
+
+  void calculateAngleIndex(int i) {
+    if (laser_scan_->ranges[i] < laser_scan_->range_max &&
+        laser_scan_->ranges[i] >= max_range &&
+        !std::isinf(laser_scan_->ranges[i])) {
+
+      // Check greater range obstacle direction
+      bool thereIsAnObstacleInThisAngle = false;
+
+      for (int y = i - 60; y <= i + 60; y++) {
+        if (((laser_scan_->ranges[y] < collisionThreshold &&
+              laser_scan_->ranges[y] > laser_scan_->range_min))) {
+          thereIsAnObstacleInThisAngle = true;
+          break;
+        }
+      }
+
+      if (thereIsAnObstacleInThisAngle) {
+        return;
+      }
+
+      max_range = laser_scan_->ranges[i];
+      if (range_index >= 360) {
+        range_index = i + 30;
+      } else {
+        range_index = i - 30;
+      }
+    }
   }
 
   // cmd_vel control
@@ -78,6 +99,9 @@ private:
   // Laser data subscriber
   rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr subscription_;
   std::shared_ptr<sensor_msgs::msg::LaserScan> laser_scan_;
+
+  float max_range = 0;
+  float range_index = 0;
 };
 
 int main(int argc, char *argv[]) {
