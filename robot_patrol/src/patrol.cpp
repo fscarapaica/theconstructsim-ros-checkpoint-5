@@ -30,7 +30,11 @@ private:
     laser_scan_ = std::make_shared<sensor_msgs::msg::LaserScan>(*msg);
 
     if (laser_scan_ != nullptr && !laser_scan_->ranges.empty()) {
-      angle = calculateSafeAreaAngle();
+      if (calculateCollisionOnAngle(360, 60)) {
+        angle = calculateSafeAreaAngle();
+      } else {
+        angle = 0;
+      }
     }
   }
 
@@ -68,17 +72,7 @@ private:
         !std::isinf(laser_scan_->ranges[i])) {
 
       // Check greater range obstacle direction
-      bool thereIsAnObstacleInThisAngle = false;
-
-      for (int y = i - 60; y <= i + 60; y++) {
-        if (((laser_scan_->ranges[y] < collisionThreshold &&
-              laser_scan_->ranges[y] > laser_scan_->range_min))) {
-          thereIsAnObstacleInThisAngle = true;
-          break;
-        }
-      }
-
-      if (thereIsAnObstacleInThisAngle) {
+      if (calculateCollisionOnAngle(i, 60)) {
         return;
       }
 
@@ -89,6 +83,16 @@ private:
         range_index = i - 30;
       }
     }
+  }
+
+  bool calculateCollisionOnAngle(int angleIndex, int range) {
+    for (int y = angleIndex - range; y <= angleIndex + range; y++) {
+      if (((laser_scan_->ranges[y] < collisionThreshold &&
+            laser_scan_->ranges[y] > laser_scan_->range_min))) {
+        return true;
+      }
+    }
+    return false;
   }
 
   // cmd_vel control
