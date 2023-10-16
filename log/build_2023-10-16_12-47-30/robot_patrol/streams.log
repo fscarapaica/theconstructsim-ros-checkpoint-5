@@ -1,0 +1,24 @@
+[0.009s] Invoking command in '/home/user/ros2_ws/src/build/robot_patrol': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy _=/usr/bin/env /usr/bin/cmake --build /home/user/ros2_ws/src/build/robot_patrol -- -j8 -l8
+[0.171s] [100%] Built target robot_patrol_node
+[0.186s] Invoked command in '/home/user/ros2_ws/src/build/robot_patrol' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy _=/usr/bin/env /usr/bin/cmake --build /home/user/ros2_ws/src/build/robot_patrol -- -j8 -l8
+[0.323s] Invoking command in '/home/user/ros2_ws/src/build/robot_patrol': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy _=/usr/bin/env /usr/bin/cmake --install /home/user/ros2_ws/src/build/robot_patrol
+[0.349s] -- Install configuration: ""
+[0.349s] -- Up-to-date: /home/user/ros2_ws/src/install/robot_patrol/lib/robot_patrol/robot_patrol_node
+[0.350s] -- Up-to-date: /home/user/ros2_ws/src/install/robot_patrol/share/robot_patrol//launch
+[0.350s] -- Up-to-date: /home/user/ros2_ws/src/install/robot_patrol/share/robot_patrol//launch/start_patrolling.launch.py
+[0.350s] -- Up-to-date: /home/user/ros2_ws/src/install/robot_patrol/share/ament_index/resource_index/package_run_dependencies/robot_patrol
+[0.351s] -- Up-to-date: /home/user/ros2_ws/src/install/robot_patrol/share/ament_index/resource_index/parent_prefix_path/robot_patrol
+[0.351s] -- Up-to-date: /home/user/ros2_ws/src/install/robot_patrol/share/robot_patrol/environment/ament_prefix_path.sh
+[0.352s] -- Up-to-date: /home/user/ros2_ws/src/install/robot_patrol/share/robot_patrol/environment/ament_prefix_path.dsv
+[0.352s] -- Up-to-date: /home/user/ros2_ws/src/install/robot_patrol/share/robot_patrol/environment/path.sh
+[0.352s] -- Up-to-date: /home/user/ros2_ws/src/install/robot_patrol/share/robot_patrol/environment/path.dsv
+[0.353s] -- Up-to-date: /home/user/ros2_ws/src/install/robot_patrol/share/robot_patrol/local_setup.bash
+[0.353s] -- Up-to-date: /home/user/ros2_ws/src/install/robot_patrol/share/robot_patrol/local_setup.sh
+[0.353s] -- Up-to-date: /home/user/ros2_ws/src/install/robot_patrol/share/robot_patrol/local_setup.zsh
+[0.353s] -- Up-to-date: /home/user/ros2_ws/src/install/robot_patrol/share/robot_patrol/local_setup.dsv
+[0.362s] -- Installing: /home/user/ros2_ws/src/install/robot_patrol/share/robot_patrol/package.dsv
+[0.363s] -- Up-to-date: /home/user/ros2_ws/src/install/robot_patrol/share/ament_index/resource_index/packages/robot_patrol
+[0.363s] -- Up-to-date: /home/user/ros2_ws/src/install/robot_patrol/share/robot_patrol/cmake/robot_patrolConfig.cmake
+[0.363s] -- Up-to-date: /home/user/ros2_ws/src/install/robot_patrol/share/robot_patrol/cmake/robot_patrolConfig-version.cmake
+[0.363s] -- Up-to-date: /home/user/ros2_ws/src/install/robot_patrol/share/robot_patrol/package.xml
+[0.363s] Invoked command in '/home/user/ros2_ws/src/build/robot_patrol' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy _=/usr/bin/env /usr/bin/cmake --install /home/user/ros2_ws/src/build/robot_patrol
