@@ -36,11 +36,14 @@ endif()
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/GetDirection.srv"
+  DEPENDENCIES sensor_msgs
 )
 
+# Add robot_patrol_node
 add_executable(robot_patrol_node src/patrol.cpp)
 ament_target_dependencies(robot_patrol_node rclcpp geometry_msgs sensor_msgs)
 
+# Add direction_service_node
 add_executable(direction_service_node src/direction_service.cpp)
 ament_target_dependencies(direction_service_node rclcpp sensor_msgs)
 rosidl_target_interfaces(direction_service_node
