@@ -178,9 +178,8 @@ private:
   }
 
   double calculateDestinationDirectionAngle() {
-    double target_angle = atan2(destination_pos_.y - current_pos.y,
+    return atan2(destination_pos_.y - current_pos.y,
                                 destination_pos_.x - current_pos.x);
-    return target_angle - current_pos.theta;
   }
 
   float yawRadNormalize(float yawNormalize) {
